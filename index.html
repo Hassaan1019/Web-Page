@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Grill Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="Restaurant Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Product</a></li>
+                <li><a href="#promo">Promo</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-content">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button class="close-search" onclick="closeSearch()">×</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>GRILLED FOODS</h1>
+            <p>Experience the perfect blend of flavors in every bite. Order now and satisfy your cravings!</p>
+            <button class="cta-button">Order Now</button>
+        </div>
+    </section>
+
+    <!-- Best Seller Section -->
+    <section id="products" class="best-seller">
+        <h2>Best Seller</h2>
+        <div class="dishes-container">
+            <div class="dish-card">
+                <img src="dish1.jpg" alt="Popular Dish 1">
+                <h3>Grilled Chicken</h3>
+                <p>Perfectly grilled chicken with savory spices.</p>
+            </div>
+            <div class="dish-card">
+                <img src="dish2.jpg" alt="Popular Dish 2">
+                <h3>Spicy Wings</h3>
+                <p>Hot and crispy chicken wings to tantalize your taste buds.</p>
+            </div>
+            <div class="dish-card">
+                <img src="DISH3.jpg" alt="Popular Dish 3">
+                <h3>BBQ Platter</h3>
+                <p>A combination of our finest barbecue offerings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oriental Treats Section -->
+    <section id="about" class="oriental-treats">
+        <div class="content">
+            <h2>Oriental Treats</h2>
+            <p>Discover a variety of oriental flavors that will transport you to another world.</p>
+            <button class="order-button">Order Now</button>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="statistics">
+        <div class="stat-container">
+            <div class="stat-item">
+                <h3>123</h3>
+                <p>Outlets</p>
+            </div>
+            <div class="stat-item">
+                <h3>100</h3>
+                <p>Cities</p>
+            </div>
+            <div class="stat-item">
+                <h3>300</h3>
+                <p>Menu</p>
+            </div>
+            <div class="stat-item">
+                <h3>30</h3>
+                <p>Staff</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section id="contact" class="subscribe">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay updated with the latest offers and menu additions.</p>
+        <form class="subscribe-form">
+            <input type="email" placeholder="Your Email">
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>FOLLOW US</h3>
+                <p>Bringing you the best grilled chicken dishes since 1995.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#">History</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Brand Guidelines</a></li>
+                    <li><a href="#">Terms & Condition</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">How to Order</a></li>
+                    <li><a href="#">Our Product</a></li>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Promo</a></li>
+                    <li><a href="#">Payment Method</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Get all navigation links
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        // Add click event listener to each link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Get the href attribute
+                const href = this.getAttribute('href');
+                
+                // Only handle same-page links (those starting with #)
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+                // For external links (like product.html), let the default behavior happen
+            });
+        });
+
+        // Add scroll event listener to highlight current section
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
